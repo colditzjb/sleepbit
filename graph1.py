@@ -44,3 +44,28 @@ frames = [df, smoothed]
 joined = pd.concat(frames, axis=1)
 joined.columns = ['raw', 'smooth']
 joined.plot()
+
+#Using MatPlotLib to customize the graph
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+
+data = joined.reset_index()
+origin = 0
+hrs=9
+plt.clf()
+plt.cla()
+plt.close()
+
+raw, = plt.plot(data.index, data['raw'], lw=0, ls='', c='black', label='FitBit')
+black_patch = mpatches.Patch(color='black', label='FitBit')
+smooth, = plt.plot(data.index, data['smooth'], lw=3.0, ls='-', c='red', label='Smoothed')
+plt.fill_between(data.index, 0, data['raw'], facecolor='k')
+xp = np.linspace(origin, 60*hrs, 1000)
+plt.ylim(1,3)
+plt.ylabel('Movement')
+plt.xlim(origin, 60*hrs)
+plt.xticks(np.arange(origin, (60*hrs)+1, 60))
+plt.xlabel('Minutes')
+plt.legend([black_patch,smooth], ['FitBit','Smoothed'])
+plt.show()
