@@ -1,4 +1,4 @@
 fitbit
 ======
 
-A FitBit API Application (in progress)
+A FitBit API Application (abandoned)
